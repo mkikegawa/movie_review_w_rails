@@ -1,0 +1,74 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://github.com/mkikegawa/movie_review" target="_blank">Martin Kikegawa Movie List</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li <%= 'class="active"' if @active == 'home' %>><a href="/">Home<span class="sr-only">(current)</span></a></li>
+        <li <%= 'class="active"' if @active == 'movies' %>><a href="/movies">Movies</a></li>
+        <li <%= 'class="active"' if @active == 'about' %>><a href="/about">About</a></li>
+      </ul>
+      <form class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" name="search" value="<%= @search %>" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="reset" class="btn btn-default"
+                  onclick="window.location.href='/movies'">Reset</button>
+      </form>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div class="row well">
+  <div class="col-md-offset-1 col-md-10">
+   <% if @library.empty? %>
+    <table class="table table-bordered table-striped">
+      <tr>
+        <td class='col-xs-12 text-center'><%= @search %> is not found.</td> 
+      </tr>
+      <<tr>
+        <td class='col-xs-12 text-center'>Please enter New Search term or Press Reset</td>
+      </tr>
+    <% else %>
+      <table class="table table-bordered table-striped table-hover">
+        <tr >
+          <th class="col-md-2 text-center">
+             <%=raw Library.sort_link_generator("title", @search, @category, "glyphicon-sort-by-alphabet", @sort_order) %>
+            </th>
+          <th class="col-md-4 text-center">Actors</th>
+          <th class="col-md-1 text-center">
+              <%=raw Library.sort_link_generator("earnings", @search, @category, "glyphicon-sort-by-order", @sort_order) %>
+          </th> 
+          <th class="col-md-3 text-center">Genre</th>
+          <th class="col-md-2 text-center">
+              <%=raw Library.sort_link_generator("released", @search, @category, "glyphicon-sort-by-attributes", 
+                @sort_order) %>
+          </th>        
+        </tr>   
+        <% @library.each do |movie| %>
+          <tr>
+            <td class="text-left"><a href="movies/<%= movie.id %>"><%= movie.title %></a></td>
+            <td class="text-left"><a href="movies/<%= movie.id %>"><%= movie.actors_list %></a></td>
+            <td class="text-center"><a href="movies/<%= movie.id %>">$<%= movie.earnings %>M</a></td>
+            <td class="text-left"><a href="movies/<%= movie.id %>"><%= movie.genre_list %></a></td>
+            <td class="text-center"><a href="movies/<%= movie.id %>"><%= movie.released %></a></td>
+          </tr>
+        <% end %>
+      </table>
+      <p class="text-right">
+         * Information source -- <a href="http://www.rottentomatoes.com/">Rottentomatos.com</a>
+      </p>
+    <% end %>
+  </div>
+</div

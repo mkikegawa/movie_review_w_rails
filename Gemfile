@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'pry'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
@@ -43,6 +44,8 @@ group :development, :test do
   gem 'spring'
 
   gem 'rspec-rails', '~> 3.0'
+
+  gem 'awesome_print'
 end
 
 group :test do 

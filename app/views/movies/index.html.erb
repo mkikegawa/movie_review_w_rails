@@ -29,9 +29,9 @@
         <% @library.each do |movie| %>
           <tr>
             <td class="text-left"><a href="movies/<%= movie.id %>"><%= movie.title %></a></td>
-            <td class="text-left"><a href="movies/<%= movie.id %>"><%= movie.actors_list %></a></td>
+            <td class="text-left"><a href="movies/<%= movie.id %>"><%= movie.actors %></a></td>
             <td class="text-center"><a href="movies/<%= movie.id %>">$<%= movie.earnings %>M</a></td>
-            <td class="text-left"><a href="movies/<%= movie.id %>"><%= movie.genre_list %></a></td>
+            <td class="text-left"><a href="movies/<%= movie.id %>"><%= movie.genre %></a></td>
             <td class="text-center"><a href="movies/<%= movie.id %>"><%= movie.released %></a></td>
           </tr>
         <% end %>

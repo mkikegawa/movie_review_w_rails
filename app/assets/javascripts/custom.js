@@ -4,7 +4,7 @@ function goBack() {
 }
 
 var video = document.getElementById("campy_vid");
-video.onended = function() {
+function vidmute() {
   video.muted = true;
   video.load()
 }

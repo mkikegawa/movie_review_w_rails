@@ -14,10 +14,10 @@ class MoviesController < ApplicationController
   def show
     @active = 'movies'
     @search = params[:search]
-    if !@search
+    unless @search
       @movie = Library.find_by_id(params[:id].to_i)
     else
-      redirect to("/movies?search=#{ @search }")
+      redirect_to("/movies?search=#{ params[:search] }")
     end
   end
 end

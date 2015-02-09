@@ -12,11 +12,6 @@
   padding: 20px;
 }
 
-/*.enter-button {
-  margin: -15% auto 0 auto;
-  z-index: 10;
-}*/
-
 #video-box {
   position: absolute;
   top:0%;
@@ -31,11 +26,11 @@ video {
   z-index:-10;
 }
 
-video#campy_vid {
+#campy_vid {
   width: 100%;
 }
 
 
 #campy_vid + .row {
-  margin-top: 65%%;
+  margin-top: 65%;
 }

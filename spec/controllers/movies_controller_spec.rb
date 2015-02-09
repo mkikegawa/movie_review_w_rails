@@ -10,7 +10,7 @@ describe MoviesController, type: :controller do
 
   describe '#show' do
     it 'renders movie' do
-      get :show, id: 1
+      get :show, id: 1 
       expect(response).to render_template(:show)
     end
   end

@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 describe MoviesController, type: :controller do 
+  Movie.destroy_all
   let(:movie1) { Movie.create(title: 'American Sniper',
                 plot: 'From director Clint Eastwood comes \'American Sniper,\'starring Bradley Cooper as ',
                 actors: [

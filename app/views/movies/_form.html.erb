@@ -1,0 +1,11 @@
+<%= form_for @movie do |m| %>
+  Title: <%= m.text_field :title %>
+  Plot:  <%= m.text_field :plot %>
+  Actors: <%= m.text_field :actors %>
+  Released: <%= m.text_field :released %>
+  Genre: <%= m.text_field :genre %>
+  Trailer: <%= m.text_field :trailer %>
+  Earnings: <%= m.text_field :earnings %>
+
+  <%= m.submit "New/Edit Movie" %>
+<% end %>

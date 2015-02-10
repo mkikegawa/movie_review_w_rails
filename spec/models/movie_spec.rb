@@ -49,35 +49,35 @@ describe Movie do
       end
     end
 
-    describe 'actors' do
-      context 'not present' do
-        before { movie.actors = nil }
-        it { should_not be_valid }
-      end
-    end
+    # describe 'actors' do
+    #   context 'not present' do
+    #     before { movie.actors = nil }
+    #     it { should_not be_valid }
+    #   end
+    # end
  
 
-    describe 'genre' do
-      context 'not present' do
-        before { movie.genre = nil }
-        it { should_not be_valid }
-      end
-    end
+    # describe 'genre' do
+    #   context 'not present' do
+    #     before { movie.genre = nil }
+    #     it { should_not be_valid }
+    #   end
+    # end
   
 
-    describe 'released' do
-      context 'not present' do
-        before { movie.released = nil }
-        it { should_not be_valid }
-      end
-    end
+    # describe 'released' do
+    #   context 'not present' do
+    #     before { movie.released = nil }
+    #     it { should_not be_valid }
+    #   end
+    # end
   
-    describe 'trailer' do
-      context 'not present' do
-        before { movie.trailer = nil }
-        it { should_not be_valid }
-      end
-    end
+    # describe 'trailer' do
+    #   context 'not present' do
+    #     before { movie.trailer = nil }
+    #     it { should_not be_valid }
+    #   end
+    # end
 
     describe 'earnings' do
       context 'not present' do

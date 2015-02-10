@@ -20,4 +20,25 @@ class MoviesController < ApplicationController
       redirect_to("/movies?search=#{ params[:search] }")
     end
   end
+
+  def new
+    @movie = Movie.new
+  end
+
+  def create
+    @movie = Movie.new(movie_params)
+    if @movie.save
+      flash[:success] = 'Movie was successfully created.'
+      redirect_to movies_path
+    else
+      render 'new'
+    end
+  end
+
+  private
+
+  def movie_params
+    params.require(:movie).permit(:title, :plot, :actors, :released, :genre, :trailer, :earnings)
+  end
+  
 end

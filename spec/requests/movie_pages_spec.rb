@@ -104,6 +104,58 @@ describe 'movie pages' do
       end
     end
   end 
+
+  describe 'edit movie page' do
+    let(:movie) { Movie.create(title: 'American Sniper',
+                plot: 'From director Clint Eastwood comes \'American Sniper,\'starring Bradley Cooper as ',
+                actors: [
+                  'Bradley Cooper',
+                  'Sienna Miller',
+                  'Ben Reed',
+                  'Luke Grimes',
+                  'Kyle Gallner',
+                  'Elise Robertson'
+                ],
+                released: Date.new(2015, 1, 16),
+                genre: ['Action & Adventure'],
+                trailer: 'www.youtube.com/embed/99k3u9ay1gs',
+                earnings: 64.6
+                ) }
+    
+    before { visit edit_movie_path(movie.id) }
+
+    it { should have_title('Edit') }
+    it { should have_selector('h1', 'Edit this Movie') }
+
+    describe 'update movie' do
+      let(:submit) { 'New/Edit Movie' }
+
+      context 'valid information' do
+
+        before do
+          fill_in 'Title', with: 'Greatest Movie 3'
+          click_button submit
+        end
+
+        describe 'after saving changes' do
+          it { should have_title('Greatest Movie 3') }
+
+          specify { expect(movie.reload.title).to eq('Greatest Movie 3') }
+        end
+      end
+
+      context 'invalid information' do
+        before do
+          fill_in 'Title', with: ' '
+          click_button submit
+        end
+        describe 'after submission' do
+          it { should have_title('Edit') }
+          it { should have_content('error') }
+        end
+      end
+    end
+  end  
 end
 
 

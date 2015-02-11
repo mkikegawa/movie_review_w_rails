@@ -109,4 +109,94 @@ describe MoviesController, type: :controller do
       end
     end
   end
+
+  describe 'PATCH #update' do
+    let(:movie) { Movie.create(title: 'American Sniper',
+                plot: 'From director Clint Eastwood comes \'American Sniper,\'starring Bradley Cooper as ',
+                actors: [
+                  'Bradley Cooper',
+                  'Sienna Miller',
+                  'Ben Reed',
+                  'Luke Grimes',
+                  'Kyle Gallner',
+                  'Elise Robertson'
+                ],
+                released: Date.new(2015, 1, 16),
+                genre: ['Action & Adventure'],
+                trailer: 'www.youtube.com/embed/99k3u9ay1gs',
+                earnings: 64.6
+                ) }
+    context 'valid_attributes' do
+      it 'updates movie' do
+        patch :update, id: movie.id, movie: { title: 'Greater Movie 3'}
+        movie.reload
+        expect(movie.title).to eq('Greater Movie 3') 
+      end
+
+      it 'redirects to movies#show' do
+        patch :update, id: movie.id, movie: { title: 'Greater Movie 3'}
+        expect(response).to redirect_to(movie_path(movie.id))
+      end
+    end
+
+    context 'invalid_attributes' do
+      it 'does not update movie' do
+        patch :update, id: movie.id, movie: { title: '' }
+        movie.reload
+        expect(movie.title).to eq('American Sniper')
+      end
+
+      it 're-renders edit' do
+        patch :update, id: movie.id, movie: { title: '' }
+        expect(response).to render_template(:edit) 
+      end
+    end  
+  end
+
+  describe 'DELETE #destroy' do
+    it 'deletes requested movie' do
+      movie = Movie.create(title: 'American Sniper',
+                plot: 'From director Clint Eastwood comes \'American Sniper,\'starring Bradley Cooper as ',
+                actors: [
+                  'Bradley Cooper',
+                  'Sienna Miller',
+                  'Ben Reed',
+                  'Luke Grimes',
+                  'Kyle Gallner',
+                  'Elise Robertson'
+                ],
+                released: Date.new(2015, 1, 16),
+                genre: ['Action & Adventure'],
+                trailer: 'www.youtube.com/embed/99k3u9ay1gs',
+                earnings: 64.6
+                ) 
+      expect {
+        delete :destroy, id: movie.id
+      }.to change(Movie, :count).by(-1)
+    end
+
+    it 'redirects to index' do
+      movie = Movie.create(title: 'American Sniper',
+                plot: 'From director Clint Eastwood comes \'American Sniper,\'starring Bradley Cooper as ',
+                actors: [
+                  'Bradley Cooper',
+                  'Sienna Miller',
+                  'Ben Reed',
+                  'Luke Grimes',
+                  'Kyle Gallner',
+                  'Elise Robertson'
+                ],
+                released: Date.new(2015, 1, 16),
+                genre: ['Action & Adventure'],
+                trailer: 'www.youtube.com/embed/99k3u9ay1gs',
+                earnings: 64.6
+                ) 
+      delete :destroy, id: movie.id
+      expect(response).to redirect_to(movies_path)
+    end
+  end
 end
+
+
+
+

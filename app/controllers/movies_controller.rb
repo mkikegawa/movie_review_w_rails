@@ -5,9 +5,9 @@ class MoviesController < ApplicationController
     @search     = params[:search]
     @active     = 'movies'
     if @category || @search
-      @library = Library.movies_search_sort(@search, @category, @sort_order)
+      @movie = Library.movies_search_sort(@search, @category, @sort_order)
     else
-      @library = Library.all
+      @movie = Library.all
     end
   end
 
@@ -22,6 +22,7 @@ class MoviesController < ApplicationController
   end
 
   def new
+    @active = 'movies'
     @movie = Movie.new
   end
 
@@ -33,6 +34,28 @@ class MoviesController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  def edit
+    @active = 'movies'  
+    @movie = Movie.find(params[:id])
+  end
+
+  def update
+    @movie = Movie.find(params[:id])
+    if @movie.update_attributes(movie_params)
+      flash[:success] = 'Item updated.'
+      redirect_to movie_path(@movie.id)
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    @movie = Movie.find(params[:id])
+    @movie.destroy
+    flash[:success] = 'Item deleted.'
+    redirect_to movies_path
   end
 
   private

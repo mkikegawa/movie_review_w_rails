@@ -2,7 +2,7 @@
 <div class="row well">
   <div class="col-md-offset-1 col-md-10">
     <%= link_to 'Add new movie', new_movie_path %>
-   <% if @library.empty? %>
+   <% if @movie.empty? %>
     
     <table class="table table-bordered table-striped">
       <tr>
@@ -17,7 +17,7 @@
           <th class="col-md-2 text-center">
              <%=raw Library.sort_link_generator("title", @search, @category, "glyphicon-sort-by-alphabet", @sort_order) %>
             </th>
-          <th class="col-md-4 text-center">Actors</th>
+          <th class="col-md-3 text-center">Actors</th>
           <th class="col-md-1 text-center">
               <%=raw Library.sort_link_generator("earnings", @search, @category, "glyphicon-sort-by-order", @sort_order) %>
           </th> 
@@ -25,18 +25,34 @@
           <th class="col-md-2 text-center">
               <%=raw Library.sort_link_generator("released", @search, @category, "glyphicon-sort-by-attributes", 
                 @sort_order) %>
-          </th>        
+          </th>  
+          <th class="col-md-1 text-center">
+              Delete
+          </th>
         </tr>   
-        <% @library.each do |movie| %>
+        <% @movie.each do |movie| %>
           <tr>
-            <td class="text-left"><a href="movies/<%= movie.id %>"><%= movie.title %></a></td>
-            <td class="text-left"><a href="movies/<%= movie.id %>"><%= movie.actors %></a></td>
-            <td class="text-center"><a href="movies/<%= movie.id %>">$<%= movie.earnings %>M</a></td>
-            <td class="text-left"><a href="movies/<%= movie.id %>"><%= movie.genre %></a></td>
-            <td class="text-center"><a href="movies/<%= movie.id %>"><%= movie.released %></a></td>
+            <td class="text-left">
+              <a href="movies/<%= movie.id %>"><%= movie.title %></a>
+            </td>
+            <td class="text-left">
+              <a href="movies/<%= movie.id %>"><%= movie.actors %></a>
+            </td>
+            <td class="text-center">
+              <a href="movies/<%= movie.id %>">$<%= movie.earnings %>M</a>
+            </td>
+            <td class="text-left">
+              <a href="movies/<%= movie.id %>"><%= movie.genre %></a>
+            </td>
+            <td class="text-center">
+              <a href="movies/<%= movie.id %>"><%= movie.released %></a>
+            </td>
+            <td class='text-center'>
+              <%= link_to 'X', movie, method: :delete, 
+                data: { confirm: 'Are you sure?' } %>
+            </td>
           </tr>
         <% end %>
-      </table>
       <p class="text-right">
          * Information source -- <a href="http://www.rottentomatoes.com/">Rottentomatos.com</a>
       </p>

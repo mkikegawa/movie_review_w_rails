@@ -15,15 +15,15 @@
       <table class="table table-bordered table-striped table-hover">
         <tr >
           <th class="col-md-2 text-center">
-             <%=raw Library.sort_link_generator("title", @search, @category, "glyphicon-sort-by-alphabet", @sort_order) %>
+             <%=raw Movie.sort_link_generator("title", @search, @category, "glyphicon-sort-by-alphabet", @sort_order) %>
             </th>
           <th class="col-md-3 text-center">Actors</th>
           <th class="col-md-1 text-center">
-              <%=raw Library.sort_link_generator("earnings", @search, @category, "glyphicon-sort-by-order", @sort_order) %>
+              <%=raw Movie.sort_link_generator("earnings", @search, @category, "glyphicon-sort-by-order", @sort_order) %>
           </th> 
           <th class="col-md-3 text-center">Genre</th>
           <th class="col-md-2 text-center">
-              <%=raw Library.sort_link_generator("released", @search, @category, "glyphicon-sort-by-attributes", 
+              <%=raw Movie.sort_link_generator("released", @search, @category, "glyphicon-sort-by-attributes", 
                 @sort_order) %>
           </th>  
           <th class="col-md-1 text-center">
